@@ -1,0 +1,12 @@
+<h1>Published Posts</h1>
+
+<% @posts.each do |post| %>
+  <% if post.status == 'published' %>
+    <div class="post">
+      <%= image_tag post.image.url if post.image? %>
+      <h2><%= post.title %></h2>
+      <p><%= post.description %></p>
+       <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-success' %>
+    </div>
+  <% end %>
+<% end %>

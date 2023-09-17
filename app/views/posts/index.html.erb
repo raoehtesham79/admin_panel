@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Posts</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Posts</h1>
+    <p id="notice"><%= notice %></p>
+
+    <% @posts.each do |post| %>
+      <div class="post-container">
+        <% if post.image? %>
+          <%= image_tag post.image.url, class: 'post-image' %>
+        <% end %>
+
+        <div class="post-details">
+          <strong>Title:</strong> <%= post.title %><br>
+          <strong>Description:</strong> <%= post.description %>
+        </div>
+      </div>
+      <div class="col-md-5 d-flex justify-content-around">
+          <%= link_to 'Show', post, class: 'btn btn-warning' %>
+          <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-success ' %>
+          <%= form_with(model: post, method: :delete) do |form| %>
+            <%= form.submit "Delete", class: 'btn btn-danger' %>
+          <% end %>
+
+           <% if current_user && current_user.admin %>
+            <%= form_with(model: post, method: :patch, url: approve_post_path(post)) do |form| %>
+              <%= form.submit "Approve", class: 'btn btn-success' %>
+            <% end %>
+            <%= form_with(model: post, method: :patch, url: reject_post_path(post)) do |form| %>
+              <%= form.submit "Reject", class: 'btn btn-warning' %>
+            <% end %>
+            <%= form_with(model: post, method: :patch, url: publish_post_path(post)) do |form| %>
+              <%= form.submit "Publish", class: 'btn btn-primary' %>
+            <% end %>
+          <% end %>
+        </div>
+    <% end %>
+
+    <%= link_to 'New Post', new_post_path, id: 'new-post-link', class: 'btn btn-success' %>
+  </div>
+</body>
+</html>

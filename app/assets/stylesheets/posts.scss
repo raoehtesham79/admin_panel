@@ -1,0 +1,49 @@
+/* Style the individual post containers using Flexbox */
+.post-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* Style the post image to be larger */
+.post-image {
+  max-width: 200px; /* Increase the max-width to make the image larger */
+  max-height: 150px; /* You can adjust the max-height as needed */
+  margin-right: 20px;
+  flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+/* Style the post details */
+.post-details {
+  flex: 1; /* Expand to fill available space */
+}
+
+/* Style the post actions (Show, Edit, Delete) */
+.post-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align buttons to the start (left side) */
+}
+
+/* Style the buttons to have the same size */
+.btn {
+  padding: 10px 20px; /* Adjust padding for the desired button size */
+  margin-bottom: 10px; /* Add spacing between buttons */
+}
+
+/* Style the New Post button */
+#new-post-link {
+  display: block;
+  margin-top: 20px;
+  text-align: center; /* Center the button text */
+}
+
+.post-actions{
+  display: flex;
+}
+img{
+  width: 40%;
+  height: 40%;
+}
