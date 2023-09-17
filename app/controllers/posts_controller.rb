@@ -31,7 +31,7 @@ class PostsController < ApplicationController
     @post.status = 'draft'
     respond_to do |format|
       if @post.save
-        get_audits_params(@post, 'create')
+        create_audits_params(@post, 'create')
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        get_audits_params(@post, 'update')
+        create_audits_params(@post, 'update')
         format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -57,7 +57,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy
-    get_audits_params(@post, 'destroy')
+    create_audits_params(@post, 'destroy')
     respond_to do |format|
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
@@ -98,7 +98,7 @@ class PostsController < ApplicationController
       params.require(:post).permit(:title, :description, :image)
     end
 
-    def get_audits_params(post, action_name)
+    def create_audits_params(post, action_name)
       audits_params =  {
         object_id: post.id,
         performed_by_id: current_user.id,

@@ -13,14 +13,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.posts.update_all(user_id: nil)
     @user.destroy
-    get_audits_params(@user, 'destroy')
+    create_audits_params(@user, 'destroy')
     redirect_to users_path, notice: "User was successfully deleted."
   end
 
   def update_role
     @user = User.find(params[:id])
     if @user.update(user_params)
-      get_audits_params(@user, 'update_role')
+      create_audits_params(@user, 'update_role')
       redirect_to users_path, notice: "User's role was successfully updated."
     else
       render :edit_role
@@ -28,7 +28,15 @@ class UsersController < ApplicationController
   end
 
   def create_new_role
-  end 
+    @user = User.new(user_params)
+    @user.role = 'editor'
+    if @user.save
+      create_audits_params(@user, 'create_new_role')
+      redirect_to users_path, notice: "User was successfully created."
+    else
+      render :new
+    end
+  end
 
   def get_new_role
     @user = User.new
@@ -45,7 +53,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:role, :name, :email, :password, :password_confirmation)
   end
 
-  def get_audits_params(user, action_name)
+  def create_audits_params(user, action_name)
     audits_params =  {
       object_id: user.id,
       performed_by_id: current_user.id,
