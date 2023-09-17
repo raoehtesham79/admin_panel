@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'rejected'
       get 'approved'
       get 'published'
+      get 'dashboard'
     end
   end
 
@@ -24,12 +25,14 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'users/sign_out' => 'devise/sessions#destroy'
   end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  authenticated :user do
-    root to: 'posts#welcome', as: :authenticated_root
+
+  authenticated :user, lambda { |u| u.admin } do
+    root 'posts#dashboard', as: :admin_dashboard
   end
 
-  unauthenticated :user do
-    root to: 'posts#welcome', as: :unauthenticated_root
+  authenticated :user, lambda { |u| u.editor } do
+    root to: 'posts#index', as: :editor_dashboard
   end
+
+  root 'posts#welcome'
 end

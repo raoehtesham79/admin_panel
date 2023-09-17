@@ -3,49 +3,70 @@
    <head>
       <title>Home Page</title>
       <%= stylesheet_link_tag 'welcome', media: 'all' %>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+      <link rel="stylesheet" type="text/css" href="styles.css">
+      <style>
+         .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            padding: 20px;
+         }
+         .content {
+            margin-left: 20px;
+            padding: 20px;
+         }
+      </style>
    </head>
    <body>
-      <h1 class="text-center">Welcome to the Home Page</h1>
-      <% if user_signed_in? %>
-      <p>You are logged in as <%= current_user.email %></p>
-      <%= link_to "View Profile", edit_user_registration_path, class: "btn btn-primary" %>
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
-      <% else %>
-      <section class="h-100 gradient-form" style="background-color: #eee;">
-         <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-               <div class="col-xl-10">
-                  <div class="card rounded-3 text-black">
-                     <div class="row g-0">
-                        <div class="col-lg-6">
-                           <div class="card-body p-md-5 mx-md-4">
-                              <div class="text-center">
-                                 <h4 class="mt-1 mb-5 pb-1">Welcome to our Posts</h4>
-                              </div>
-                              <form>
-                                 <div class="d-flex align-items-center justify-content-center pb-4">
-                                    <button class="btn btn-primary fa-lg gradient-custom-2 mb-3 m-4" type="button"> <%= link_to "Login", new_user_session_path %></button>
-                                    <button class="btn btn-primary fa-lg gradient-custom-2 mb-3 m-4" type="button"><%= link_to "Sign up", new_user_registration_path %></button>
+      <div class="sidebar">
+         <h2>Dashboard</h2>
+         <% if user_signed_in? %>
+            <p>You are logged in as <%= current_user.email %></p>
+            <%= link_to "View Profile", edit_user_registration_path, class: "btn btn-primary" %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
+         <% else %>
+            <button class="btn btn-primary fa-lg gradient-custom-2 mb-3 m-4">
+               <%= link_to "Login", new_user_session_path %>
+            </button>
+            <button class="btn btn-primary fa-lg gradient-custom-2 mb-3 m-4">
+               <%= link_to "Sign up", new_user_registration_path %>
+            </button>
+         <% end %>
+      </div>
+      <div class="content">
+         <h1 class="text-center">Welcome to the Home Page</h1>
+         <section class="h-100 gradient-form" style="background-color: #eee;">
+            <div class="container py-5 h-100">
+               <div class="row d-flex justify-content-center align-items-center h-100">
+                  <div class="col-xl-10">
+                     <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                           <div class="col-lg-6">
+                              <div class="card-body p-md-5 mx-md-4">
+                                 <div class="text-center">
+                                    <h4 class="mt-1 mb-5 pb-1">Welcome to our Posts</h4>
                                  </div>
-                              </form>
+                              </div>
                            </div>
-                        </div>
-                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                           <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                              <h4 class="mb-4">We are more than just a company</h4>
-                              <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                              </p>
+                           <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                              <div class="text-black px-3 py-4 p-md-5 mx-md-4">
+                                 <h4 class="mb-4">We have many posts with various categories</h4>
+                                 <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                 </p>
+                              </div>
                            </div>
                         </div>
                      </div>
                   </div>
                </div>
             </div>
-         </div>
-      </section>
-      <% end %>
+         </section>
+      </div>
    </body>
 </html>

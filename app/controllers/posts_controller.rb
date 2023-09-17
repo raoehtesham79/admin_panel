@@ -21,6 +21,9 @@ class PostsController < ApplicationController
   def edit
   end
 
+  def dashboard
+  end
+
   def create
     @user = current_user
     @post = Post.new(post_params)
