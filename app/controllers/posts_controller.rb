@@ -105,7 +105,7 @@ class PostsController < ApplicationController
         performed_by: current_user.role,
         object_type: 'Post',
         action_name: action_name,
-        data: post_params
+        data: post
       }
       unless Audit.create(audits_params)
         self.errors.add(:audits, 'Unable to save audits')
