@@ -16,12 +16,20 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-  resources :users, only: [:index, :destroy] do
+  resources :users, only: [:index, :destroy, :create, :create_new_role] do
     member do
       get 'edit_role'
       patch 'update_role'
+      delete 'destroy'
+      get 'destroy'
+    end
+
+    collection do 
+      get 'get_new_role'
+      post 'create_new_role'
     end
   end
+
   devise_scope :user do
     get 'users/sign_out' => 'devise/sessions#destroy'
   end

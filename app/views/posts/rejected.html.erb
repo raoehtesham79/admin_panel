@@ -10,12 +10,7 @@
         <%= form_with(model: post, url: publish_post_path(post), method: :patch) do |form| %>
           <%= form.submit "Publish", class: 'btn btn-success' %>
         <% end %>
-
-        <%= form_with(model: post, url: reject_post_path(post), method: :patch) do |form| %>
-          <%= form.submit "Reject", class: 'btn btn-danger' %>
-        <% end %>
       </div>
-
     </div>
   <% end %>
 <% end %>

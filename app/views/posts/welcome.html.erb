@@ -3,7 +3,6 @@
    <head>
       <title>Home Page</title>
       <%= stylesheet_link_tag 'welcome', media: 'all' %>
-      <link rel="stylesheet" type="text/css" href="styles.css">
       <style>
          .sidebar {
             width: 250px;
@@ -26,6 +25,7 @@
          <h2>Dashboard</h2>
          <% if user_signed_in? %>
             <p>You are logged in as <%= current_user.email %></p>
+            <%= link_to 'New Post', new_post_path, id: 'new-post-link', class: 'btn btn-success' %>
             <%= link_to "View Profile", edit_user_registration_path, class: "btn btn-primary" %>
             <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
          <% else %>
